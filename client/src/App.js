@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import TodoItem from "./components/ToDoItem"; // Import new component
 import "./App.css"; // Import styles
+import placeholder from "./images/placeholder.jpg"
 
 const API_URL = "http://localhost:5000/api/todos";
 
@@ -42,21 +43,30 @@ function App() {
 
     return (
         <div className="container">
-            <h1>To-Do List</h1>
-            <div className="todo-input">
-                <input
-                    type="text"
-                    value={newTodo}
-                    onChange={(e) => setNewTodo(e.target.value)}
-                    placeholder="Add a new task"
-                />
-                <button onClick={addTodo}>Add</button>
+            <div className="catalog">
+                <search>
+                    <form>
+                        <input name='query' id="query" placeholder="Luffy"></input>
+                    </form>
+                </search>
+
+                <div className="cardCatalog">
+
+                </div>
             </div>
-            <ul className="todo-list">
-                {todos.map(todo => (
-                    <TodoItem key={todo._id} todo={todo} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
-                ))}
-            </ul>
+
+            <div className="userProfile">
+                <img src={placeholder} alt="Avatar" id="avatar"></img>
+            </div>
+
+            <div className="display">
+                <img src="" alt="Hover Card"></img>
+
+                <div className="description">
+                    <p>Lorem Ipsum</p>
+                </div>
+            </div>
+
         </div>
     );
 }
