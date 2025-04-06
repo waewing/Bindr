@@ -1,12 +1,60 @@
+/* * { border: 1px solid red !important; } */
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #3A3C56;
     text-align: center;
-    margin: 0;
-    padding: 20px;
 }
-.container{
-    margin: auto;
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    gap: 10px;
+    overflow: hidden;
+}
+
+.banner{
+    background-color: #202136;
+    height: 50px;
+    border-radius: 22.5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.bannerText{
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #ffffff;
+}
+
+.userProfile{
+    display: flex;
+    align-items: center;
+    height: 90%;
+}
+
+#avatar{
+    border: 5px solid #9699C3;
+    border-radius: 50%;
+    max-height: 75%;
+}
+
+.search-bar{
+    display: flex;
+    margin-left: 1%;
 }
 
 input {
@@ -16,31 +64,64 @@ input {
     border-radius: 22.5px;
 }
 
-.catalog{
-    width: 425px;
-    height: 800px;
-}
-
 #query{
     width: 260px;
     margin-right: 100%;
+    margin-bottom: 5%;
     background: #9699C3;
+    display: flex;
+}
+
+.content-wrapper {
+    margin-left: 1%;
+    flex: 1; /* Take up remaining space */
+    display: grid;
+    grid-template-columns: 7fr 3fr;
+    gap: 0 1em;
+    overflow: hidden;
+    min-height: 0; /* Allow content to shrink if needed */
 }
 
 .cardCatalog{
-    width: 95%;
-    height: 95%;
-    margin-top: 1%;
     border-radius: 6px;
     background: #202136;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    row-gap: 1em;
+    overflow-y: scroll;
 }
 
-.userProfile{
-    top: 0px;
-    right: 0px;
+.display{
+    display: grid;
+    grid-template-columns: 1fr 8fr 1fr;
+    grid-template-rows: 6fr 4fr;
+    gap: 1em 0;
+    max-height: 100%;
+    overflow: hidden;
 }
-#avatar{
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
+
+#hoverDisplay{
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+    justify-self: center;
 }
+
+.description{
+    grid-row: 2 / 3;
+    grid-column: 1 / 4;
+    background: #202136;
+    border-radius: 6px;
+    display: flex;
+    max-height: 100%;
+    overflow: hidden;
+}
+
+#card-text{
+    color: #ffffff;
+    overflow: scroll;
+    max-height: 100%;
+    width: 100%;
+    padding: 1em;
+    box-sizing: border-box;
+}   
+
