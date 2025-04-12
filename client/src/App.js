@@ -5,7 +5,7 @@ import "./App.css"; // Import styles
 import placeholder from "./images/placeholder.jpg";
 import placeholder2 from "./images/BT5-112.png";
 
-const API_URL = "http://localhost:5000/api/todos";
+const API_URL = "http://localhost:5000/";
 
 function App() {
     const [todos, setTodos] = useState([]);

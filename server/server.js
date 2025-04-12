@@ -15,7 +15,7 @@ app.use(express.json());
 
 
 //Routes
-app.use("/api", todoRoutes);
+app.use("/", todoRoutes);
 
 
 // Connect to MongoDB

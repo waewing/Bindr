@@ -130,7 +130,7 @@ dist
 .pnp.*
 
 #images
-../images
+/images
 
 #db
-../db
+/db
