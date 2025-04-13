@@ -155,7 +155,7 @@ db = client['One_Piece_TCG']
 # driver = webdriver.Firefox()  # Or Firefox, Edge, etc.
 
 
-directory = r"C:\Users\Wayne Ewing\Documents\GitHub\FullStack-Todo\images"
+directory = r"C:\Users\Wayne Ewing\Documents\GitHub\FullStack-Todo\client\src\images"
 
 codings = defaultdict(str)
 
@@ -167,12 +167,11 @@ for (root, dirs, files) in os.walk(directory):
         code, name = test[0].split(r"_")
         name = '"Gang"'.join(name.split('Gang'))
         name = '"Captain"'.join(name.split('Captain'))
-
-        path = '\\'.join(root.split('\\')[-2::])+f'\\{file}'
+        path =  '/'.join(root.split('\\')[-2::]) + f'/{file}'
         
-        codings[code + name] = '\\' + path
+        codings[code + name] = './' + path
 
-codings['Captain John'] = '\\images\\OP07\\OP07-082_Captain John.png'
+codings['Captain John'] = './images/OP07/OP07-082_Captain John.png'
 
 for i in range(1, 12):
     collection = db[f"OP{str(i).zfill(2)}"]

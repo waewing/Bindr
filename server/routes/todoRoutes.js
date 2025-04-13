@@ -1,12 +1,22 @@
 const express = require("express");
-const OP10 = require('../models/card');
+const {OP01, OP02, OP03, OP04, OP05, OP06, OP07, OP08, OP09, OP10} = require('../models/card');
 
 const router = express.Router();
 
 router.get("/", async(req, res) => {
     try{
-        const cards = await OP10.find().select('-img');
-        console.log('Found Cards', cards);
+        const set1 = await OP01.find();
+        const set2 = await OP02.find();
+        const set3 = await OP03.find();
+        const set4 = await OP04.find();
+        const set5 = await OP05.find();
+        const set6 = await OP06.find();
+        const set7 = await OP07.find();
+        const set8 = await OP08.find();
+        const set9 = await OP09.find();
+        const set10 = await OP10.find();
+
+        cards = [set1, set2, set3, set4, set5, set6, set7, set8, set9, set10]
         res.json(cards);
     }
     catch (err){

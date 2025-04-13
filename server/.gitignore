@@ -129,8 +129,3 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-#images
-/images
-
-#db
-/db
