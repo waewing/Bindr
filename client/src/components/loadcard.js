@@ -1,6 +1,6 @@
 import React from "react";
 
-const cardFiller = ({onClick, alt, imageSource,}) => {
+const cardFiller = ({onClick, imageSource, name, set, code}) => {
     const cardStyle = {
         height: "160px",
         width: "100px",
@@ -8,7 +8,7 @@ const cardFiller = ({onClick, alt, imageSource,}) => {
     };
 
     return(
-        <img style={cardStyle} onClick={onClick} src={imageSource} alt={"card"+alt}></img>
+        <img style={cardStyle} className='card' id={name} set={set} code={code} onClick={onClick} src={imageSource} alt={name}></img>
     );
 }
 

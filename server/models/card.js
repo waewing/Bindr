@@ -38,6 +38,7 @@ const OP07 = mongoose.model("OP07", OPSchema, 'OP07');
 const OP08 = mongoose.model("OP08", OPSchema, 'OP08');
 const OP09 = mongoose.model("OP09", OPSchema, 'OP09');
 const OP10 = mongoose.model("OP10", OPSchema, 'OP10');
+const OP11 = mongoose.model("OP11", OPSchema, 'OP11');
 
 module.exports = {
     OP01,
@@ -49,5 +50,6 @@ module.exports = {
     OP07,
     OP08,
     OP09,
-    OP10
+    OP10,
+    OP11
 };

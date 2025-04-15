@@ -91,6 +91,10 @@ input {
     overflow-y: scroll;
 }
 
+.cardCatalog img {
+    display: 
+}
+
 .display{
     display: grid;
     grid-template-columns: 1fr 8fr 1fr;

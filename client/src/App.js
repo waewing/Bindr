@@ -27,6 +27,27 @@ function App() {
     }, []);
 
 
+    function filterCards(){
+        var input, filter, cardCatalog, list, image, id, set, code;
+
+        input = document.getElementById('query');
+        filter = input.value.toUpperCase();
+        cardCatalog = document.getElementsByClassName('cardCatalog');
+        list = cardCatalog[0].getElementsByClassName('card');
+
+        for (let i = 0; i < list.length; i++){
+            image = list[i];
+            id = image.id;
+            set = image.getAttribute('set');
+            code = image.getAttribute('code');
+
+            if (id.toUpperCase().indexOf(filter) > -1 || set.toUpperCase().indexOf(filter) > -1 || code.toUpperCase().indexOf(filter) > -1) {
+                list[i].style.display = "";
+            } else {
+                list[i].style.display = "none";
+            }
+        }
+    }
 
     return (
         <div>
@@ -40,9 +61,7 @@ function App() {
                 
                 <div className="search-bar">
                     <search>
-                        <form>
-                            <input name='query' id="query" placeholder="Luffy"></input>
-                        </form>
+                            <input name='query' id="query" onKeyUp={filterCards} placeholder="Luffy"></input>
                     </search>
                 </div>
 
@@ -51,7 +70,7 @@ function App() {
                     <div className="cardCatalog">
                         {
                             flat.map(card => (
-                                <CardFiller onClick={() => {setHoveredImage(card.img_src);sethoveredDescription(card.effect);}} key={card._id}  alt = {card.name}  imageSource={card.img_src}/>
+                                <CardFiller onClick={() => {setHoveredImage(card.img_src);sethoveredDescription(card.effect);}} key={card._id} name={card.name} set={card.set} code={card.code} imageSource={card.img_src}/>
                             ))
                         }
                     </div>
