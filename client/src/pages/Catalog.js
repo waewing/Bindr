@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import {React,  useState, useEffect } from "react";
 import axios from "axios";
-import CardFiller from "./components/loadcard"; // Import new component
-import "./App.css"; // Import styles
-import placeholder from "./images/placeholder.jpg";
+import CardFiller from "../components/loadcard"; // Import new component
+import "./Catalog.css"; // Import styles
+import placeholder from "../images/placeholder.jpg";
+import { Button } from "bootstrap";
 
 const API_URL = "http://localhost:5000/";
 
-function App() {
+function Catalog() {
     const [data, setData] = useState([]);
     const [flat, setFlat] = useState([]);
     const [hoveredImage, setHoveredImage] = useState(null);
@@ -54,8 +55,9 @@ function App() {
             <div className="container">
                 <header className="banner">
                     <div className="bannerText">Binder.io</div>
+                    <button id="Collections" textContent="Collections"/>
                     <div className="userProfile">
-                        <img src={placeholder} alt="Avatar" id="avatar"></img>
+                        <img src={placeholder} onClick="" alt="Avatar" id="avatar"></img>
                     </div>
                 </header>
                 
@@ -88,4 +90,4 @@ function App() {
     );
 }
 
-export default App;
+export default Catalog;

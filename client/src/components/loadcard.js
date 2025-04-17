@@ -1,6 +1,6 @@
 import React from "react";
 
-const cardFiller = ({onClick, imageSource, name, set, code}) => {
+const CardFiller = ({onClick, imageSource, name, set, code}) => {
     const cardStyle = {
         height: "160px",
         width: "100px",
@@ -12,4 +12,4 @@ const cardFiller = ({onClick, imageSource, name, set, code}) => {
     );
 }
 
-export default cardFiller;
+export default CardFiller;
