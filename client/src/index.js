@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Catalog from './pages/Catalog';
+import Catalog from './pages/CatalogPage';
+import Profile from './pages/ProfilePage';
+import Login from './pages/LoginPage';
+import SignUp from './pages/SignupPage';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider} from 'react-router-dom';
 
@@ -11,6 +14,19 @@ const router = createBrowserRouter([
   element: <Catalog/>,
   errorElement: <div>Error 404</div>,
   },
+  {
+    path: '/profile/:id',
+    element: <Profile/>,
+  },
+  {
+    path: '/login',
+    element: <Login/>,
+  },
+  {
+    path: '/signup',
+    element: <SignUp/>,
+  },
+
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

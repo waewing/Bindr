@@ -1,9 +1,9 @@
 import {React,  useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import CardFiller from "../components/loadcard"; // Import new component
-import "./Catalog.css"; // Import styles
+import CardFiller from "../components/loadcard";
+import "./CatalogPage.css"; // Import styles
 import placeholder from "../images/placeholder.jpg";
-import { Button } from "bootstrap";
 
 const API_URL = "http://localhost:5000/";
 
@@ -12,6 +12,7 @@ function Catalog() {
     const [flat, setFlat] = useState([]);
     const [hoveredImage, setHoveredImage] = useState(null);
     const [hoveredDescription, sethoveredDescription] = useState("");
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get(API_URL)
@@ -50,14 +51,22 @@ function Catalog() {
         }
     }
 
+    function toLogin(){
+        navigate('/login');
+    }
+
+    function toProfile(){
+        navigate('/profile/1');
+    }
+
     return (
         <div>
             <div className="container">
                 <header className="banner">
                     <div className="bannerText">Binder.io</div>
-                    <button id="Collections" textContent="Collections"/>
+                    <button id="Collections" onClick={toLogin}/>
                     <div className="userProfile">
-                        <img src={placeholder} onClick="" alt="Avatar" id="avatar"></img>
+                        <img src={placeholder} onClick={toProfile} alt="Avatar" id="avatar"></img>
                     </div>
                 </header>
                 

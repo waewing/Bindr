@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require('express');
 const cors = require("cors");
 const mongoose = require("./config/db");
-const todoRoutes = require("./routes/todoRoutes");
+const OnePiece = require("./routes/OnePieceRoute");
 
 
 const app = express();
@@ -15,7 +15,7 @@ app.use(express.json());
 
 
 //Routes
-app.use("/", todoRoutes);
+app.use("/", OnePiece);
 
 
 // Connect to MongoDB

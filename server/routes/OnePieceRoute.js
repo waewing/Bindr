@@ -1,5 +1,5 @@
 const express = require("express");
-const {OP01, OP02, OP03, OP04, OP05, OP06, OP07, OP08, OP09, OP10, OP11} = require('../models/card');
+const {OP01, OP02, OP03, OP04, OP05, OP06, OP07, OP08, OP09, OP10, OP11} = require('../models/OnePieceCards');
 
 const router = express.Router();
 

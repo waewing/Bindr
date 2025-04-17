@@ -131,3 +131,7 @@ input {
     box-sizing: border-box;
 }   
 
+#Collections{
+    height: 1em;
+    width: 2em;
+}
