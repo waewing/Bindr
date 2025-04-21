@@ -2,7 +2,7 @@ import {React,  useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import CardFiller from "../components/loadcard";
-import "./CatalogPage.css"; // Import styles
+import styles from "./CatalogPage.module.css"; // Import styles
 import placeholder from "../images/placeholder.jpg";
 
 const API_URL = "http://localhost:5000/";
@@ -34,7 +34,7 @@ function Catalog() {
 
         input = document.getElementById('query');
         filter = input.value.toUpperCase();
-        cardCatalog = document.getElementsByClassName('cardCatalog');
+        cardCatalog = document.getElementsByClassName(styles.cardCatalog);
         list = cardCatalog[0].getElementsByClassName('card');
 
         for (let i = 0; i < list.length; i++){
@@ -61,24 +61,24 @@ function Catalog() {
 
     return (
         <div>
-            <div className="container">
-                <header className="banner">
-                    <div className="bannerText">Binder.io</div>
-                    <button id="Collections" onClick={toLogin}/>
-                    <div className="userProfile">
-                        <img src={placeholder} onClick={toProfile} alt="Avatar" id="avatar"></img>
+            <div className={styles.container}>
+                <header className={styles.banner}>
+                    <div className={styles.bannerText}>Binder.io</div>
+                    <button id="collections" onClick={toLogin}>Collections</button>
+                    <div className={styles.userProfile}>
+                        <img src={placeholder} onClick={toProfile} alt="Avatar" id="avatar" className={styles.avatar}></img>
                     </div>
                 </header>
                 
-                <div className="search-bar">
+                <div className={styles.searchBar}>
                     <search>
-                            <input name='query' id="query" onKeyUp={filterCards} placeholder="Luffy"></input>
+                            <input name='query' id="query" className={styles.query} onKeyUp={filterCards} placeholder="Luffy"></input>
                     </search>
                 </div>
 
-                <div className="content-wrapper">
+                <div className={styles.contentWrapper}>
                     
-                    <div className="cardCatalog">
+                    <div className={styles.cardCatalog}>
                         {
                             flat.map(card => (
                                 <CardFiller onClick={() => {setHoveredImage(card.img_src);sethoveredDescription(card.effect);}} key={card._id} name={card.name} set={card.set} code={card.code} imageSource={card.img_src}/>
@@ -86,11 +86,11 @@ function Catalog() {
                         }
                     </div>
 
-                    <div className="display">
-                        <img id="hoverDisplay" src={hoveredImage} alt="Hover Card"></img>
+                    <div className={styles.display}>
+                        <img id="hoverDisplay" src={hoveredImage} alt="Hover Card" className={styles.hoverDisplay}></img>
 
-                        <div className="description">
-                            <p id="card-text">{hoveredDescription}</p>
+                        <div className={styles.description}>
+                            <p id="card-text" className={styles['card-text']}>{hoveredDescription}</p>
                         </div>
                     </div>
                 </div>

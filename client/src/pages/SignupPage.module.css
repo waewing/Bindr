@@ -1,0 +1,100 @@
+html, body{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+body {
+    /* Ensure body fills viewport */
+    min-height: 100vh;
+}
+
+.container{
+    /* Make container fill entire viewport */
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 3fr 4fr 3fr;
+    grid-template-rows: 1fr 8fr 1fr;
+    font-family: Arial, sans-serif;
+    background-color: #202136;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.login-box{
+    height: 100%;
+    width: 100%;
+    grid-row: 2/3;
+    grid-column: 2/3;
+    background: #3A3C56;
+    border-radius: 23px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Add styles for the form elements */
+.username, .password, .submit {
+    width: 80%;
+    margin-bottom: 20px;
+}
+
+.username p, .password p {
+    color: white;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #9699C3;
+    background-color: #202136;
+    color: white;
+}
+
+#log-in-button {
+    padding: 10px 20px;
+    background-color: #4a4e8e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+#log-in-button:hover {
+    background-color: #6064a7;
+}
+
+header {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+:global(body) {
+    /* These styles apply globally */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    /* These styles are scoped to this module */
+    background-color: #202136;
+    /* other styles */
+}
