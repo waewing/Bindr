@@ -1,7 +1,10 @@
 import React from 'react';
 import {useParams, useNavigate} from 'react-router-dom';
+import { useAuth0 } from "@auth0/auth0-react";
+import LoginButton from "../components/LoginButton"
 import styles from "./LoginPage.module.css";
  
+
 export default function Login(){
     const params = useParams();
     const navigate = useNavigate();
@@ -9,6 +12,7 @@ export default function Login(){
     function toProfile(){
         navigate('/profile/1');
     }
+    
     return(
         <div className={styles.container}>
             <div className={styles['login-box']}>
@@ -26,10 +30,11 @@ export default function Login(){
                 </div>
 
                 <div className={styles.submit}>
-                    <button id='log-in-button' onClick={toProfile}>Login</button>
+                    <LoginButton/>
                 </div>
                 
             </div>            
         </div>
     )
 }
+

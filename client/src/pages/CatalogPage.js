@@ -4,6 +4,10 @@ import axios from "axios";
 import CardFiller from "../components/loadcard";
 import styles from "./CatalogPage.module.css"; // Import styles
 import placeholder from "../images/placeholder.jpg";
+import { useAuth0 } from "@auth0/auth0-react";
+import LoginButton from "../components/LoginButton"
+import LogoutButton from "../components/LogoutButton"
+import Login from "./LoginPage";
 
 const API_URL = "http://localhost:5000/";
 
@@ -13,6 +17,7 @@ function Catalog() {
     const [hoveredImage, setHoveredImage] = useState(null);
     const [hoveredDescription, sethoveredDescription] = useState("");
     const navigate = useNavigate();
+    const {user, isAuthenticated, loginWithRedirect } = useAuth0();
 
     useEffect(() => {
         axios.get(API_URL)
@@ -51,12 +56,13 @@ function Catalog() {
         }
     }
 
-    function toLogin(){
-        navigate('/login');
-    }
-
     function toProfile(){
-        navigate('/profile/1');
+        if(isAuthenticated){
+            navigate('/profile');
+        }
+        else{
+            return loginWithRedirect();
+        }
     }
 
     return (
@@ -64,7 +70,8 @@ function Catalog() {
             <div className={styles.container}>
                 <header className={styles.banner}>
                     <div className={styles.bannerText}>Binder.io</div>
-                    <button id="collections" onClick={toLogin}>Collections</button>
+                    <LoginButton/>
+                    <LogoutButton/>
                     <div className={styles.userProfile}>
                         <img src={placeholder} onClick={toProfile} alt="Avatar" id="avatar" className={styles.avatar}></img>
                     </div>

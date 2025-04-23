@@ -7,6 +7,7 @@ import Login from './pages/LoginPage';
 import SignUp from './pages/SignupPage';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider} from 'react-router-dom';
+import { Auth0Provider } from '@auth0/auth0-react';
 
 const router = createBrowserRouter([
   {
@@ -15,7 +16,7 @@ const router = createBrowserRouter([
   errorElement: <div>Error 404</div>,
   },
   {
-    path: '/profile/:id',
+    path: '/profile',
     element: <Profile/>,
   },
   {
@@ -32,7 +33,14 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <Auth0Provider 
+      domain='dev-fnrnn64sdqefi86m.us.auth0.com' 
+      clientId='r2BuYsNLiZ4SahlZOkgYmRUEi1ZpwrLy' 
+      authorizationParams={{
+        redirect_uri: "http://localhost:3000/profile"
+    }}>
+      <RouterProvider router={router}/>
+    </Auth0Provider>
   </React.StrictMode>
 );
 
