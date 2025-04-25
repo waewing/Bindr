@@ -1,17 +1,34 @@
-import React from 'react';
-import {useParams, useNavigate} from 'react-router-dom';
+import {React,  useState, useEffect } from "react";
+import axios from "axios";
+import {useNavigate} from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
 import styles from "./ProfilePage.module.css";
 import placeholder from "../images/placeholder.jpg";
 
+const API_URL = "http://localhost:5000/";
+
 export default function Profile(){
-    const params = useParams();
+    const [name, setuserName] = useState("");
+    const {user, isAuthenticated, isLoading } = useAuth0();
     const navigate = useNavigate();
+
+
     function toCatalog(){
         navigate('/');
     }
+
+
+    const addProfile = () => {
+        axios.post(API_URL, { userID: user.sub, displayName: name})
+            .catch(err => console.error(err));
+    };
     
-    const {user, isAuthenticated, isLoading } = useAuth0();
+
+    useEffect(() => {
+        setuserName("Antyriku2");
+        // addProfile();
+    }, []);
+
 
     if (isLoading) {
         return <div>Loading ...</div>;
@@ -34,7 +51,7 @@ export default function Profile(){
                     <img className={styles.enlargedAvatar} src={placeholder} alt="Avatar" id="enlargedAvatar"/>
 
                     <div className={styles.settings}>
-                        <p>{user.name}</p>
+                        <p>{user.sub}</p>
                     </div>
                 </div>
 

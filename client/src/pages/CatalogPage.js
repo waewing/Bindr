@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import CardFiller from "../components/loadcard";
 import styles from "./CatalogPage.module.css"; // Import styles
-import placeholder from "../images/placeholder.jpg";
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "../components/LoginButton"
 import LogoutButton from "../components/LogoutButton"
-import Login from "./LoginPage";
+import placeholder from "../images/placeholder.jpg";
+import placeholder2 from "../images/placeholder2.png";
 
 const API_URL = "http://localhost:5000/";
 
@@ -16,6 +16,7 @@ function Catalog() {
     const [flat, setFlat] = useState([]);
     const [hoveredImage, setHoveredImage] = useState(null);
     const [hoveredDescription, sethoveredDescription] = useState("");
+
     const navigate = useNavigate();
     const {user, isAuthenticated, loginWithRedirect } = useAuth0();
 
@@ -73,7 +74,7 @@ function Catalog() {
                     <LoginButton/>
                     <LogoutButton/>
                     <div className={styles.userProfile}>
-                        <img src={placeholder} onClick={toProfile} alt="Avatar" id="avatar" className={styles.avatar}></img>
+                        <img src={isAuthenticated ? placeholder : placeholder2} onClick={toProfile} alt="Avatar" id="avatar" className={styles.avatar}></img>
                     </div>
                 </header>
                 

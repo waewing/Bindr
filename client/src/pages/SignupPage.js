@@ -1,9 +1,8 @@
 import React from 'react';
-import {useParams, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import styles from "./SignupPage.module.css";
  
 export default function SignUp(){
-    const params = useParams();
     const navigate = useNavigate();
 
     function toProfile(){
