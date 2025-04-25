@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require("cors");
 const mongoose = require("./config/db");
 const OnePiece = require("./routes/OnePieceRoute");
+const UserProfile = require("./routes/UserProfileRoute");
 
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(express.json());
 
 //Routes
 app.use("/", OnePiece);
+app.use("/:id", UserProfile);
 
 
 // Connect to MongoDB

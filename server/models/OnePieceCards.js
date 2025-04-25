@@ -27,18 +27,19 @@ const OPSchema = new mongoose.Schema({
     }
 
 });
+const db = mongoose.connection.useDb("One_Piece_TCG");
 
-const OP01 = mongoose.model("OP01", OPSchema, 'OP01');
-const OP02 = mongoose.model("OP02", OPSchema, 'OP02');
-const OP03 = mongoose.model("OP03", OPSchema, 'OP03');
-const OP04 = mongoose.model("OP04", OPSchema, 'OP04');
-const OP05 = mongoose.model("OP05", OPSchema, 'OP05');
-const OP06 = mongoose.model("OP06", OPSchema, 'OP06');
-const OP07 = mongoose.model("OP07", OPSchema, 'OP07');
-const OP08 = mongoose.model("OP08", OPSchema, 'OP08');
-const OP09 = mongoose.model("OP09", OPSchema, 'OP09');
-const OP10 = mongoose.model("OP10", OPSchema, 'OP10');
-const OP11 = mongoose.model("OP11", OPSchema, 'OP11');
+const OP01 = db.model("OP01", OPSchema, 'OP01');
+const OP02 = db.model("OP02", OPSchema, 'OP02');
+const OP03 = db.model("OP03", OPSchema, 'OP03');
+const OP04 = db.model("OP04", OPSchema, 'OP04');
+const OP05 = db.model("OP05", OPSchema, 'OP05');
+const OP06 = db.model("OP06", OPSchema, 'OP06');
+const OP07 = db.model("OP07", OPSchema, 'OP07');
+const OP08 = db.model("OP08", OPSchema, 'OP08');
+const OP09 = db.model("OP09", OPSchema, 'OP09');
+const OP10 = db.model("OP10", OPSchema, 'OP10');
+const OP11 = db.model("OP11", OPSchema, 'OP11');
 
 module.exports = {
     OP01,
