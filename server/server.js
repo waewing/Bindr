@@ -17,7 +17,7 @@ app.use(express.json());
 
 //Routes
 app.use("/", OnePiece);
-app.use("/:id", UserProfile);
+app.use("/", UserProfile);
 
 
 // Connect to MongoDB

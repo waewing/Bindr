@@ -8,31 +8,41 @@ import placeholder from "../images/placeholder.jpg";
 const API_URL = "http://localhost:5000/";
 
 export default function Profile(){
-    const [name, setuserName] = useState("");
-    const {user, isAuthenticated, isLoading } = useAuth0();
+    const [name, setUserName] = useState("");
+    const { user, isAuthenticated, isLoading } = useAuth0();
     const navigate = useNavigate();
 
+    useEffect(() => {
+        const addProfile = async () => {
+            try {
+                await axios.post(API_URL + user.sub.split('|')[1], {
+                    userID: user.sub,        // Auth0 user ID (e.g., auth0|abc123)
+                    displayName: name || user.name || "Unnamed" // Fall back if needed
+                });
+            } catch (err) {
+                console.error('Error creating profile:', err);
+            }
+        };
+
+        // Wait until loading is done and user is authenticated
+        if (!isLoading && isAuthenticated) {
+            setUserName("Antyriku2"); // You could use user.name instead of hardcoding if you want
+            
+            // Now create the profile
+            addProfile();
+        }
+    }, [isLoading, isAuthenticated, user]); // Depend on auth state
+
+    
 
     function toCatalog(){
         navigate('/');
     }
 
-
-    const addProfile = () => {
-        axios.post(API_URL, { userID: user.sub, displayName: name})
-            .catch(err => console.error(err));
-    };
-    
-
-    useEffect(() => {
-        setuserName("Antyriku2");
-        // addProfile();
-    }, []);
-
-
     if (isLoading) {
-        return <div>Loading ...</div>;
+        return <div>Loading...</div>;
     }
+
 
 
     return(
@@ -51,7 +61,7 @@ export default function Profile(){
                     <img className={styles.enlargedAvatar} src={placeholder} alt="Avatar" id="enlargedAvatar"/>
 
                     <div className={styles.settings}>
-                        <p>{user.sub}</p>
+                        <p>{user.sub.split('|')[1]}</p>
                     </div>
                 </div>
 

@@ -24,7 +24,6 @@ router.post("/:id", async(req, res) => {
     try{
         const newProfile = await profile.save();
 
-        res.json(profileInfo);
         res.status(201).json(newProfile);
     }
     catch (err){

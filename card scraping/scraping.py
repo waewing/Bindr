@@ -150,37 +150,34 @@ def get_missing():
     
     return missing
 
-client = MongoClient("mongodb://127.0.0.1:27017/")
+client = MongoClient("mongodb+srv://waewing24:ohHcTjLCKpCI9hKe@bindr.ihsxekr.mongodb.net/?retryWrites=true&w=majority&appName=Bindr")
 db = client['One_Piece_TCG']
 # driver = webdriver.Firefox()  # Or Firefox, Edge, etc.
 
 
-directory = r"C:\Users\Wayne Ewing\Documents\GitHub\FullStack-Todo\client\src\images"
+# codings = defaultdict(str)
 
-codings = defaultdict(str)
+# for (root, dirs, files) in os.walk(directory):
+#     # print(f'\nRoot: {root}', f'\nDirs: {dirs}', f'\nFiles: {files}')
 
-for (root, dirs, files) in os.walk(directory):
-    # print(f'\nRoot: {root}', f'\nDirs: {dirs}', f'\nFiles: {files}')
-
-    for file in files:
-        test = file.split(r".png")
-        code, name = test[0].split(r"_")
-        name = '"Gang"'.join(name.split('Gang'))
-        name = '"Captain"'.join(name.split('Captain'))
-        path =  '/'.join(root.split('\\')[-2::]) + f'/{file}'
+#     for file in files:
+#         test = file.split(r".png")
+#         code, name = test[0].split(r"_")
+#         name = '"Gang"'.join(name.split('Gang'))
+#         name = '"Captain"'.join(name.split('Captain'))
+#         path =  '/'.join(root.split('\\')[-2::]) + f'/{file}'
         
-        codings[code + name] = './' + path
+#         codings[code + name] = './' + path
 
-codings['Captain John'] = './images/OP07/OP07-082_Captain John.png'
+# codings['Captain John'] = './images/OP07/OP07-082_Captain John.png'
 
-for i in range(1, 12):
+for i in range(2, 12):
     collection = db[f"OP{str(i).zfill(2)}"]
 
     for document in collection.find():
         try:
             # print(codings[document['code'] + document['name']])
-            collection.update_one({'code' : document['code'], 'name': document['name']}, {'$set' : {'img_src' : codings[document['code'] + document['name']]}})
-            
+            collection.update_one({'code' : document['code'], 'name': document['name']}, {'$set' : {'img_src' : 'https://optcg-images.s3.us-east-2.amazonaws.com' + document['img_src'][1:]}})
 
         except Exception as e:
             print(f'An error has occured: {e}')
