@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get("/:id", async(req, res) => {
     try{
-        const profileInfo = await UserProfile.findById(req.params.id);
+        const profileInfo = await UserProfile.find({userID: req.body.userID});
 
         res.json(profileInfo);
     }
@@ -17,7 +17,7 @@ router.get("/:id", async(req, res) => {
 router.post("/:id", async(req, res) => {
     const profile = new UserProfile({
         userID: req.params.id,
-        displayName: "user",
+        displayName: req.body.displayName,
 
     })
     

@@ -9,6 +9,7 @@ const API_URL = "http://localhost:5000/";
 
 export default function Profile(){
     const [name, setUserName] = useState("");
+    const [profileInformation, setProfileInformation] = ([]);
     const { user, isAuthenticated, isLoading } = useAuth0();
     const navigate = useNavigate();
 
@@ -17,18 +18,14 @@ export default function Profile(){
             try {
                 await axios.post(API_URL + user.sub.split('|')[1], {
                     userID: user.sub,        // Auth0 user ID (e.g., auth0|abc123)
-                    displayName: name || user.name || "Unnamed" // Fall back if needed
+                    displayName: user.name
                 });
             } catch (err) {
                 console.error('Error creating profile:', err);
             }
         };
 
-        // Wait until loading is done and user is authenticated
         if (!isLoading && isAuthenticated) {
-            setUserName("Antyriku2"); // You could use user.name instead of hardcoding if you want
-            
-            // Now create the profile
             addProfile();
         }
     }, [isLoading, isAuthenticated, user]); // Depend on auth state

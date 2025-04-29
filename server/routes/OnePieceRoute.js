@@ -3,7 +3,7 @@ const {OP01, OP02, OP03, OP04, OP05, OP06, OP07, OP08, OP09, OP10, OP11} = requi
 
 const router = express.Router();
 
-router.get("/", async(req, res) => {
+router.get("/catalog", async(req, res) => {
     try{
         const set1 = await OP01.find();
         const set2 = await OP02.find();
