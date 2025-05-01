@@ -58,7 +58,21 @@ export default function Profile(){
                     <img className={styles.enlargedAvatar} src={placeholder} alt="Avatar" id="enlargedAvatar"/>
 
                     <div className={styles.settings}>
-                        <p>{user.sub.split('|')[1]}</p>
+                        <span className={styles.changeNameText}>Username:</span>
+                        <input className={styles.changeName} placeholder={user.name}/>
+                        <button className={styles.submitName}>Submit</button>
+
+                        <span className={styles.changePasswordText}>Password:</span>
+                        <input className={styles.changePassword} placeholder={"******************"}/>
+                        <button className={styles.submitPassword}>Submit</button>
+
+                        <span className={styles.changeEmailText}>Email:</span>
+                        <input className={styles.changeEmail} placeholder={user.email}/>
+                        <button className={styles.submitEmail}>Submit</button>
+
+                        <span className={styles.changeProfile}>Change Profile:</span>
+                        <button className={styles.browse}>Browse...</button>
+
                     </div>
                 </div>
 

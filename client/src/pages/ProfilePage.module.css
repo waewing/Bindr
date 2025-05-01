@@ -2,6 +2,23 @@ p{
     color: #ffffff;
 }
 
+input {
+    max-width: 40%;
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid #202136;
+    background-color: #9699C3;
+}
+
+button{
+    max-width: 30%;
+    height: 2em;
+}
+
+span{
+    color: #ffffff;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -64,13 +81,6 @@ p{
     justify-self: center;
 }
 
-
-.settings{
-    background: #202136;
-    border-radius: 6px;
-    height: 100%;
-}
-
 .collections{
     border-radius: 6px;
     background: #202136;
@@ -78,4 +88,90 @@ p{
     grid-template-columns: repeat(10, 1fr);
     row-gap: 1em;
     overflow-y: scroll;
+}
+
+.settings{
+    background: #202136;
+    border-radius: 6px;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 8fr 1fr;
+    grid-template-rows: 2.5fr 2.5fr 2.5fr 2.5fr;
+}
+
+.changeNameText{
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    justify-self: left;
+    align-self: center;
+}
+
+.changeName{
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    justify-self: center;
+    align-self: center;
+}
+
+.submitName{
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    justify-self: right;
+    align-self: center;
+}
+
+.changePasswordText{
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    justify-self: left;
+    align-self: center;
+}
+
+.changePassword{
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    justify-self: center;
+    align-self: center;
+}
+
+.submitPassword{
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    justify-self: right;
+    align-self: center;
+}
+
+.changeEmailText{
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+    justify-self: left;
+    align-self: center;
+}
+
+.changeEmail{
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+    justify-self: center;
+    align-self: center;
+}
+
+.submitEmail{
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+    justify-self: right;
+    align-self: center;
+}
+
+.browse{
+    grid-column: 2 / 3;
+    grid-row: 4 / 5;
+    justify-self: center;
+    align-self: center;
+}
+
+.changeProfile{
+    grid-column: 2 / 3;
+    grid-row: 4 / 5;
+    justify-self: left;
+    align-self: center;
 }
