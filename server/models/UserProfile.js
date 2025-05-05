@@ -8,6 +8,10 @@ const UserProfileSchema = new mongoose.Schema({
     displayName:{
         type:String,
         required:true,
+    },
+    profileImagePath:{
+        type:String,
+        required:true,
     }
 });
 

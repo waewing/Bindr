@@ -8,28 +8,41 @@ import placeholder from "../images/placeholder.jpg";
 const API_URL = "http://localhost:5000/";
 
 export default function Profile(){
-    const [name, setUserName] = useState("");
-    const [profileInformation, setProfileInformation] = ([]);
+    // const [name, setUserName] = useState("");
     const { user, isAuthenticated, isLoading } = useAuth0();
+    const [hasProfile, setProfileStatus] = useState(false);
+    const [profileInfo, setProfileInfo] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
-        const addProfile = async () => {
+        const runProfileCheck = async () => {
             try {
-                await axios.post(API_URL + user.sub.split('|')[1], {
-                    userID: user.sub,        // Auth0 user ID (e.g., auth0|abc123)
-                    displayName: user.name
-                });
+                const res = await axios.get(API_URL + user.sub.split('|')[1]);
+                if(res.data){
+                    setProfileStatus(true);
+                    setProfileInfo(res.data);
+                }
             } catch (err) {
-                console.error('Error creating profile:', err);
+                try {
+                    await axios.post(API_URL + user.sub.split('|')[1], {
+                        userID: user.sub,   //Auth0 ID
+                        displayName: user.name,
+                        profileImagePath: placeholder,
+                    });
+                } catch (err) {
+                    console.error('Error creating profile:', err);
+                }
             }
         };
-
-        if (!isLoading && isAuthenticated) {
-            addProfile();
+    
+        if (!isLoading && isAuthenticated && !hasProfile) {
+            runProfileCheck();
         }
-    }, [isLoading, isAuthenticated, user]); // Depend on auth state
+    }, [isLoading, isAuthenticated, user]);
 
+    useEffect(() => {
+        console.log(profileInfo.profileImagePath);
+    }, [profileInfo]);
     
 
     function toCatalog(){
@@ -49,7 +62,7 @@ export default function Profile(){
                 <div className={styles.bannerText}>Binder.io</div>
                 <button id="collections" onClick={toCatalog}>Collections</button>
                 <div className={styles.userProfile}>
-                    <img src={placeholder} alt="Avatar" id="avatar" className={styles.avatar}></img>
+                    <img src={profileInfo.profileImagePath} alt="Avatar" id="avatar" className={styles.avatar}></img>
                 </div>
             </header>
 
