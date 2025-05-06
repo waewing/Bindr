@@ -79,6 +79,8 @@ span{
     border: 5px solid #9699C3;
     border-radius: 50%;
     justify-self: center;
+    width: 220px;
+    height: 220px;
 }
 
 .collections{
