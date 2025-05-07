@@ -145,35 +145,35 @@ span{
 
 .changeEmailText{
     grid-column: 2 / 3;
-    grid-row: 3 / 4;
+    grid-row: 2 / 3;
     justify-self: left;
     align-self: center;
 }
 
 .changeEmail{
     grid-column: 2 / 3;
-    grid-row: 3 / 4;
+    grid-row: 2 / 3;
     justify-self: center;
     align-self: center;
 }
 
 .submitEmail{
     grid-column: 2 / 3;
-    grid-row: 3 / 4;
+    grid-row: 2 / 3;
     justify-self: right;
     align-self: center;
 }
 
 .browse{
     grid-column: 2 / 3;
-    grid-row: 4 / 5;
+    grid-row: 3 / 4;
     justify-self: center;
     align-self: center;
 }
 
 .changeProfile{
     grid-column: 2 / 3;
-    grid-row: 4 / 5;
+    grid-row: 3 / 4;
     justify-self: left;
     align-self: center;
 }

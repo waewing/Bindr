@@ -59,4 +59,49 @@ router.patch("/:id/avatar", async(req, res)=> {
     }
 })
 
+router.patch("/:id/email", async(req, res)=> {
+    try {
+        const updatedFields = await UserProfile.findOneAndUpdate(
+            {userID: req.params.id},
+            {
+                $set : {
+                    email: req.body.email,
+                }
+            }
+        );
+
+        if (!updatedFields){
+            return res.status(404).json({ message: "Profile not found" });
+        }
+        
+        res.status(201).json(updatedFields);
+    } catch(err) {
+
+        res.status(500).json({message: err.message});
+    }
+})
+
+router.patch("/:id/name", async(req, res)=> {
+    try {
+        const updatedFields = await UserProfile.findOneAndUpdate(
+            {userID: req.params.id},
+            {
+                $set : {
+                    displayName: req.body.displayName,
+                }
+            }
+        );
+
+        if (!updatedFields){
+            return res.status(404).json({ message: "Profile not found" });
+        }
+        
+        res.status(201).json(updatedFields);
+    } catch(err) {
+
+        res.status(500).json({message: err.message});
+    }
+})
+
+
 module.exports = router;
