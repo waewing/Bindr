@@ -6,24 +6,23 @@ import styles from "./CatalogPage.module.css"; // Import styles
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "../components/LoginButton"
 import LogoutButton from "../components/LogoutButton"
-import placeholder from "../images/placeholder.jpg";
 import placeholder2 from "../images/placeholder2.png";
 
 const API_URL = "http://localhost:5000/";
 
 function Catalog() {
-    const [data, setData] = useState([]);
     const [flat, setFlat] = useState([]);
     const [hoveredImage, setHoveredImage] = useState(null);
     const [hoveredDescription, sethoveredDescription] = useState("");
+    const [profileImage, setProfileImage] = useState("");
+    const [selectedCard, setSelectedCard] = useState(null);
 
     const navigate = useNavigate();
-    const {user, isAuthenticated, loginWithRedirect } = useAuth0();
+    const {user, isLoading, isAuthenticated, loginWithRedirect } = useAuth0();
 
     useEffect(() => {
         axios.get(API_URL)
             .then(res => {
-                setData(res.data);
                 setFlat(res.data.flat());
                 setHoveredImage(res.data.flat()[0].img_src);
                 sethoveredDescription(res.data.flat()[0].effect);
@@ -33,6 +32,23 @@ function Catalog() {
                 console.error(err)
             );
     }, []);
+
+    useEffect(() => {
+        const runProfileCheck = async () => {
+            try {
+                const res = await axios.get(API_URL + user.sub.split('|').at(-1));
+                if(res.data){
+                    setProfileImage(res.data.profileImagePath);
+                }
+            } catch (err) {
+                console.error('Error creating profile:', err);
+                }
+            }
+        
+        if (!isLoading && isAuthenticated) {
+            runProfileCheck();
+        }
+        }, [isLoading, isAuthenticated, user]);
 
 
     function filterCards(){
@@ -74,7 +90,7 @@ function Catalog() {
                     <LoginButton/>
                     <LogoutButton/>
                     <div className={styles.userProfile}>
-                        <img src={isAuthenticated ? placeholder : placeholder2} onClick={toProfile} alt="Avatar" id="avatar" className={styles.avatar}></img>
+                        <img src={isAuthenticated ? profileImage : placeholder2} onClick={toProfile} alt="Avatar" id="avatar" className={styles.avatar}></img>
                     </div>
                 </header>
                 
@@ -89,7 +105,14 @@ function Catalog() {
                     <div className={styles.cardCatalog}>
                         {
                             flat.map(card => (
-                                <CardFiller onClick={() => {setHoveredImage(card.img_src);sethoveredDescription(card.effect);}} key={card._id} name={card.name} set={card.set} code={card.code} imageSource={card.img_src}/>
+                                <CardFiller onClick={() => {
+                                    setHoveredImage(card.img_src);
+                                    sethoveredDescription(card.effect);
+                                    setSelectedCard(prevSelected => prevSelected === (card.name + card.code) ? null : (card.name + card.code));}} 
+                                    key={card._id} name={card.name} 
+                                    set={card.set} code={card.code} 
+                                    imageSource={card.img_src} 
+                                    color={selectedCard === (card.name + card.code) ? '#4CAF50' : '#9699C3'}/>
                             ))
                         }
                     </div>

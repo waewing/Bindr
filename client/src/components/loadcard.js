@@ -1,10 +1,12 @@
-import {React, lazy} from "react";
+import {React} from "react";
 
-const CardFiller = ({onClick, imageSource, name, set, code}) => {
+const CardFiller = ({onClick, imageSource, name, set, code, color}) => {
     const cardStyle = {
         height: "160px",
         width: "100px",
-        justifySelf: "center"
+        justifySelf: "center",
+        borderRadius: "11px",
+        border: `5px solid ${color}`
     };
 
     return(

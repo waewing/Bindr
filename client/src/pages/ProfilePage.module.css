@@ -86,9 +86,7 @@ span{
 .collections{
     border-radius: 6px;
     background: #202136;
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    row-gap: 1em;
+    display: flex;
     overflow-y: scroll;
 }
 

@@ -38,7 +38,10 @@ root.render(
       clientId='r2BuYsNLiZ4SahlZOkgYmRUEi1ZpwrLy' 
       authorizationParams={{
         redirect_uri: "http://localhost:3000/profile"
-    }}>
+    }}
+      cacheLocation='localstorage'
+      useRefreshTokens={true}
+      >
       <RouterProvider router={router}/>
     </Auth0Provider>
   </React.StrictMode>

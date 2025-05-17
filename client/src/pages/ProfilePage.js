@@ -22,10 +22,10 @@ const s3 = new AWS.S3();
 export default function Profile(){
     const { user, isAuthenticated, isLoading } = useAuth0();
     const [hasProfile, setProfileStatus] = useState(false);
-    const [profileInfo, setProfileInfo] = useState([]);
     const [profileImage, setProfileImage] = useState("");
     const [displayName, setDisplayName] = useState("");
     const [email, setEmail] = useState("");
+    const [collections, setCollections] = useState([]);
     const navigate = useNavigate();
     const fileInput = useRef(null);
     const isInitialMount = useRef(true);
@@ -37,10 +37,10 @@ export default function Profile(){
                 const res = await axios.get(API_URL + user.sub.split('|').at(-1));
                 if(res.data){
                     setProfileStatus(true);
-                    setProfileInfo(res.data);
                     setProfileImage(res.data.profileImagePath);
                     setDisplayName(res.data.displayName);
                     setEmail(res.data.email);
+                    setCollections(res.data.collections)
                 }
             } catch (err) {
                 try {
@@ -175,7 +175,7 @@ export default function Profile(){
         <div className={styles.container}>
             <header className={styles.banner}>
                 <div className={styles.bannerText}>Binder.io</div>
-                <button id="collections" onClick={toCatalog}>Collections</button>
+                <button id="catalog" onClick={toCatalog}>Catalog</button>
                 <div className={styles.userProfile}>
                     <img src={profileImage} alt="Avatar" id="avatar" className={styles.avatar}></img>
                 </div>
