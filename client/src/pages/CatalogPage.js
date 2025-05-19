@@ -1,5 +1,5 @@
 import {React,  useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import CardFiller from "../components/loadcard";
 import styles from "./CatalogPage.module.css"; // Import styles
@@ -11,6 +11,8 @@ import placeholder2 from "../images/placeholder2.png";
 const API_URL = "http://localhost:5000/";
 
 function Catalog() {
+    const location = useLocation();
+    const state = location.state;
     const [flat, setFlat] = useState([]);
     const [hoveredImage, setHoveredImage] = useState(null);
     const [hoveredDescription, sethoveredDescription] = useState("");
@@ -19,6 +21,11 @@ function Catalog() {
 
     const navigate = useNavigate();
     const {user, isLoading, isAuthenticated, loginWithRedirect } = useAuth0();
+
+    useEffect(() => {
+        console.log(state);
+    }, [state, selectedCard]);
+
 
     useEffect(() => {
         axios.get(API_URL)
@@ -82,6 +89,10 @@ function Catalog() {
         }
     }
 
+    function addToCollection(){
+        state.push(selectedCard);
+    }
+
     return (
         <div>
             <div className={styles.container}>
@@ -122,7 +133,15 @@ function Catalog() {
 
                         <div className={styles.description}>
                             <p id="card-text" className={styles['card-text']}>{hoveredDescription}</p>
+                            <div className={styles.buttonContainer}>
+                                <button onClick={addToCollection} className={styles.addToCollection}>Add to Collection</button>
+                                <button className={styles.removeFromCollection}>Remove from Collection</button>
+                                <button className={styles.saveCollection}>Save Collection</button>
+                            </div>
                         </div>
+
+                        
+
                     </div>
                 </div>
             </div>

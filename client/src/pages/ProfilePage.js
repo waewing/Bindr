@@ -159,9 +159,18 @@ export default function Profile(){
         }
     }
 
-    //Navigate to catalog
+    //Navigate to catalog via catalog button
     function toCatalog(){
         navigate('/');
+    }
+
+    //Navigate to catalog via collection
+    function toCatalogCollection(){
+        if (collections){
+            navigate('/', {state: collections});
+        } else {
+            navigate('/', {state: {'collection1': []}});
+        }
     }
 
     if (isLoading) {
@@ -206,7 +215,7 @@ export default function Profile(){
                 </div>
 
                 <div className={styles.collections}>
-
+                        <button className={styles.addNewCollection} onClick={toCatalogCollection}>Add New Collection</button>
                 </div>
             </div>
 

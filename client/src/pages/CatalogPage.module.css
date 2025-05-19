@@ -94,18 +94,27 @@ body {
 .display{
     display: grid;
     grid-template-columns: 1fr 8fr 1fr;
-    grid-template-rows: 6fr 4fr;
+    grid-template-rows: 1fr 1fr;
     gap: 1em 0;
     max-height: 100%;
+    min-height: 0;
     overflow: hidden;
+    padding: 1em;
+    box-sizing: border-box;
 }
 
 .hoverDisplay{
     max-width: 100%;
     max-height: 100%;
+    width:auto;
+    height:auto;
     grid-row: 1 / 2;
     grid-column: 2 / 3;
     justify-self: center;
+    align-self: center;
+    object-fit: contain;
+    aspect-ratio: 2.5/3.5;
+    padding: 1em;
 }
 
 .description{
@@ -114,8 +123,11 @@ body {
     background: #202136;
     border-radius: 6px;
     display: flex;
+    flex-direction: column;
     max-height: 100%;
     overflow: hidden;
+    position: relative;
+    min-height: 0;
 }
 
 .card-text{
@@ -124,7 +136,29 @@ body {
     max-height: 100%;
     width: 100%;
     padding: 1em;
+    padding-bottom: 80px;
     box-sizing: border-box;
+    min-height: 0;
+}
+
+.buttonContainer{
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    padding: 1em;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #3A3C56;
+}
+
+.addToCollection, .removeFromCollection, .saveCollection {
+    padding: 0.5em 1em;
+    min-width: 150px;
+    white-space: nowrap;
+    font-size: 12px;
+    text-align: center;
 }
 
 button{
@@ -144,3 +178,40 @@ button{
   text-align: center;
 }
 
+
+/* Chrome, Safari, Opera */
+.cardCatalog::-webkit-scrollbar {
+    width: 8px;
+}
+
+.cardCatalog::-webkit-scrollbar-track {
+    background: #202136;
+    border-radius: 4px;
+}
+
+.cardCatalog::-webkit-scrollbar-thumb {
+    background: #9699C3;
+    border-radius: 4px;
+}
+
+.cardCatalog::-webkit-scrollbar-thumb:hover {
+    background: #7a7d9e;
+}
+
+.card-text::-webkit-scrollbar {
+    width: 8px;
+}
+
+.card-text::-webkit-scrollbar-track {
+    background: #202136;
+    border-radius: 4px;
+}
+
+.card-text::-webkit-scrollbar-thumb {
+    background: #9699C3;
+    border-radius: 4px;
+}
+
+.card-text::-webkit-scrollbar-thumb:hover {
+    background: #7a7d9e;
+}
