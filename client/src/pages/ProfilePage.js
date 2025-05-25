@@ -26,6 +26,7 @@ export default function Profile(){
     const [displayName, setDisplayName] = useState("");
     const [email, setEmail] = useState("");
     const [collections, setCollections] = useState([]);
+    const [editingCollection, setEditingCollection] = useState(null);
     const navigate = useNavigate();
     const fileInput = useRef(null);
     const isInitialMount = useRef(true);
@@ -36,12 +37,19 @@ export default function Profile(){
             try {
                 const res = await axios.get(API_URL + user.sub.split('|').at(-1));
                 if(res.data){
-                    console.log(res.data);
+                    console.log('Profile data:', res.data);
                     setProfileStatus(true);
                     setProfileImage(res.data.profileImagePath);
                     setDisplayName(res.data.displayName);
                     setEmail(res.data.email);
-                    setCollections(res.data.collections)
+                    // Convert collections object to array if it's not already
+                    const collectionsArray = Object.entries(res.data.collections || {}).map(([id, data]) => ({
+                        id,
+                        name: data.name || `Collection ${id}`,
+                        cards: data.cards || data
+                    }));
+                    console.log('Processed collections:', collectionsArray);
+                    setCollections(collectionsArray);
                 }
             } catch (err) {
                 try {
@@ -50,9 +58,10 @@ export default function Profile(){
                         displayName: user.name,
                         profileImagePath: placeholder,
                         email: user.email,
-                        collections: {}
+                        collections: {}  // Initialize as empty object
                     });
                     setProfileImage(placeholder);
+                    setCollections([]);  // Initialize collections state as empty array
 
                 } catch (err) {
                     console.error('Error creating profile:', err);
@@ -173,6 +182,29 @@ export default function Profile(){
         navigate('/', {state: collectionNumber});
     }
 
+    const handleEditCollection = (collectionId) => {
+        setEditingCollection(collectionId);
+        navigate('/', { 
+            state: { 
+                collectionId, 
+                mode: 'edit',
+                editingCollection: collectionId 
+            } 
+        });
+    };
+
+    const handleDeleteCollection = async (collectionId) => {
+        try {
+            // Delete the collection using the new endpoint
+            await axios.delete(API_URL + user.sub.split('|').at(-1) + '/collections/' + collectionId);
+            
+            // Update local state
+            setCollections(collections.filter(collection => collection.id !== collectionId));
+        } catch (err) {
+            console.error('Error deleting collection:', err);
+        }
+    };
+
     if (isLoading) {
         return <div>Loading...</div>;
     }
@@ -199,10 +231,6 @@ export default function Profile(){
                         <input className={styles.changeName}  onChange={handleNameChange} placeholder={displayName}/>
                         <button className={styles.submitName} onClick={nameChange}>Submit</button>
 
-                        {/* <span className={styles.changePasswordText}>Password:</span>
-                        <input className={styles.changePassword} placeholder={"******************"}/>
-                        <button className={styles.submitPassword}>Submit</button> */}
-
                         <span className={styles.changeEmailText}>Email:</span>
                         <input className={styles.changeEmail} onChange={handleEmailChange} placeholder={email}/>
                         <button className={styles.submitEmail} onClick={emailChange}>Submit</button>
@@ -215,7 +243,28 @@ export default function Profile(){
                 </div>
 
                 <div className={styles.collections}>
-                        <button className={styles.addNewCollection} onClick={toCatalogCollection}>Add New Collection</button>
+                    <button className={styles.addNewCollection} onClick={toCatalogCollection}>Add New Collection</button>
+                    <div className={styles.collectionList}>
+                        {collections && collections.map((collection) => (
+                            <div key={collection.id} className={styles.collectionItem}>
+                                <span className={styles.collectionName}>{collection.name}</span>
+                                <div className={styles.collectionActions}>
+                                    <button 
+                                        className={styles.editCollection}
+                                        onClick={() => handleEditCollection(collection.id)}
+                                    >
+                                        Edit
+                                    </button>
+                                    <button 
+                                        className={styles.deleteCollection}
+                                        onClick={() => handleDeleteCollection(collection.id)}
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
 

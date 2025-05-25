@@ -18,14 +18,35 @@ function Catalog() {
     const [hoveredDescription, sethoveredDescription] = useState("");
     const [profileImage, setProfileImage] = useState("");
     const [selectedCard, setSelectedCard] = useState(null);
-    const [collectionCards, setCollectionCards] = useState([])
+    const [collectionCards, setCollectionCards] = useState([]);
+    const [isEditing, setIsEditing] = useState(false);
+    const [editingCollectionId, setEditingCollectionId] = useState(null);
+    const [collectionName, setCollectionName] = useState("");
 
     const navigate = useNavigate();
     const {user, isLoading, isAuthenticated, loginWithRedirect } = useAuth0();
 
     useEffect(() => {
-        console.log(state);
+        if (state && state.mode === 'edit' && state.collectionId) {
+            setIsEditing(true);
+            setEditingCollectionId(state.collectionId);
+            // Load the collection cards and name
+            loadCollectionCards(state.collectionId);
+        }
     }, [state]);
+
+    const loadCollectionCards = async (collectionId) => {
+        try {
+            const res = await axios.get(API_URL + user.sub.split('|').at(-1));
+            if (res.data && res.data.collections && res.data.collections[collectionId]) {
+                const collection = res.data.collections[collectionId];
+                setCollectionCards(collection.cards || collection);
+                setCollectionName(collection.name || '');
+            }
+        } catch (err) {
+            console.error('Error loading collection cards:', err);
+        }
+    };
 
     useEffect(() => {
         axios.get(API_URL)
@@ -106,14 +127,24 @@ function Catalog() {
             return loginWithRedirect();
         }
 
-        const collectionName = `collection${state}`;
+        if (!collectionName.trim() && !isEditing) {
+            alert("Please enter a collection name");
+            return;
+        }
+
         try {
             const response = await axios.patch(API_URL + user.sub.split('|').at(-1) + '/collections', {
                 collections: {
-                    [collectionName]: collectionCards
+                    [editingCollectionId || `collection${state}`]: {
+                        name: collectionName.trim(),
+                        cards: collectionCards
+                    }
                 }
             });
             console.log('Collection saved successfully:', response.data);
+            if (isEditing) {
+                navigate('/profile');
+            }
         } catch (error) {
             console.error('Error saving collection:', error);
         }
@@ -148,14 +179,19 @@ function Catalog() {
                                 if (!aInCollection && bInCollection) return 1;
                                 return 0;
                             }).map(card => (
-                                <CardFiller onClick={() => {
-                                    setHoveredImage(card.img_src);
-                                    sethoveredDescription(card.effect);
-                                    setSelectedCard(prevSelected => prevSelected === (card.name + card.code) ? null : (card.name + card.code));}} 
-                                    key={card._id} name={card.name} 
-                                    set={card.set} code={card.code} 
+                                <CardFiller 
+                                    onClick={() => {
+                                        setHoveredImage(card.img_src);
+                                        sethoveredDescription(card.effect);
+                                        setSelectedCard(prevSelected => prevSelected === (card.name + card.code) ? null : (card.name + card.code));
+                                    }} 
+                                    key={card._id} 
+                                    name={card.name} 
+                                    set={card.set} 
+                                    code={card.code} 
                                     imageSource={card.img_src} 
-                                    color={collectionCards.includes(card.name + card.code) ? '#4CAF50' : selectedCard === (card.name + card.code) ? '#DAF7A6' : '#9699C3'}/>
+                                    color={collectionCards.includes(card.name + card.code) ? '#4CAF50' : selectedCard === (card.name + card.code) ? '#DAF7A6' : '#9699C3'}
+                                />
                             ))
                         }
                     </div>
@@ -166,9 +202,22 @@ function Catalog() {
                         <div className={styles.description}>
                             <p id="card-text" className={styles['card-text']}>{hoveredDescription}</p>
                             <div className={styles.buttonContainer}>
-                                <button onClick={addToCollection} className={styles.addToCollection}>Add to Collection</button>
-                                <button onClick={removeFromCollection} className={styles.removeFromCollection}>Remove from Collection</button>
-                                <button onClick={saveCollection} className={styles.saveCollection}>Save Collection</button>
+                                <div className={styles.collectionNameInput}>
+                                    <input
+                                        type="text"
+                                        placeholder={isEditing ? "Edit collection name" : "Enter collection name"}
+                                        value={collectionName}
+                                        onChange={(e) => setCollectionName(e.target.value)}
+                                        className={styles.nameInput}
+                                    />
+                                </div>
+                                <div className={styles.buttonRow}>
+                                    <button onClick={addToCollection} className={styles.addToCollection}>Add to Collection</button>
+                                    <button onClick={removeFromCollection} className={styles.removeFromCollection}>Remove from Collection</button>
+                                    <button onClick={saveCollection} className={styles.saveCollection}>
+                                        {isEditing ? 'Save Changes' : 'Save Collection'}
+                                    </button>
+                                </div>
                             </div>
                         </div>
 

@@ -141,9 +141,9 @@ body {
     min-height: 0;
 }
 
-.buttonContainer{
+.buttonContainer {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     gap: 1em;
     padding: 1em;
     position: absolute;
@@ -151,6 +151,39 @@ body {
     left: 0;
     right: 0;
     border-top: 1px solid #3A3C56;
+    background-color: #202136;
+}
+
+.collectionNameInput {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.nameInput {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #9699C3;
+    border-radius: 4px;
+    background-color: #202136;
+    color: #ffffff;
+    font-size: 16px;
+    text-align: center;
+}
+
+.nameInput:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+.nameInput::placeholder {
+    color: #9699C3;
+}
+
+.buttonRow {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    width: 100%;
 }
 
 .addToCollection, .removeFromCollection, .saveCollection {
@@ -177,7 +210,6 @@ button{
   position: relative;
   text-align: center;
 }
-
 
 /* Chrome, Safari, Opera */
 .cardCatalog::-webkit-scrollbar {
