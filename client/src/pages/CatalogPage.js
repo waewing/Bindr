@@ -18,14 +18,14 @@ function Catalog() {
     const [hoveredDescription, sethoveredDescription] = useState("");
     const [profileImage, setProfileImage] = useState("");
     const [selectedCard, setSelectedCard] = useState(null);
+    const [collectionCards, setCollectionCards] = useState([])
 
     const navigate = useNavigate();
     const {user, isLoading, isAuthenticated, loginWithRedirect } = useAuth0();
 
     useEffect(() => {
         console.log(state);
-    }, [state, selectedCard]);
-
+    }, [state]);
 
     useEffect(() => {
         axios.get(API_URL)
@@ -90,7 +90,33 @@ function Catalog() {
     }
 
     function addToCollection(){
-        state.push(selectedCard);
+        if (!collectionCards.includes(selectedCard)){
+            setCollectionCards([...collectionCards, selectedCard]);
+        }
+    }
+
+    function removeFromCollection(){
+        if (collectionCards.includes(selectedCard)){
+            setCollectionCards(collectionCards.filter(card => card !== selectedCard));
+        }
+    }
+
+    const saveCollection = async () => {
+        if (!isAuthenticated) {
+            return loginWithRedirect();
+        }
+
+        const collectionName = `collection${state}`;
+        try {
+            const response = await axios.patch(API_URL + user.sub.split('|').at(-1) + '/collections', {
+                collections: {
+                    [collectionName]: collectionCards
+                }
+            });
+            console.log('Collection saved successfully:', response.data);
+        } catch (error) {
+            console.error('Error saving collection:', error);
+        }
     }
 
     return (
@@ -115,7 +141,13 @@ function Catalog() {
                     
                     <div className={styles.cardCatalog}>
                         {
-                            flat.map(card => (
+                            [...flat].sort((a, b) => {
+                                const aInCollection = collectionCards.includes(a.name + a.code);
+                                const bInCollection = collectionCards.includes(b.name + b.code);
+                                if (aInCollection && !bInCollection) return -1;
+                                if (!aInCollection && bInCollection) return 1;
+                                return 0;
+                            }).map(card => (
                                 <CardFiller onClick={() => {
                                     setHoveredImage(card.img_src);
                                     sethoveredDescription(card.effect);
@@ -123,7 +155,7 @@ function Catalog() {
                                     key={card._id} name={card.name} 
                                     set={card.set} code={card.code} 
                                     imageSource={card.img_src} 
-                                    color={selectedCard === (card.name + card.code) ? '#4CAF50' : '#9699C3'}/>
+                                    color={collectionCards.includes(card.name + card.code) ? '#4CAF50' : selectedCard === (card.name + card.code) ? '#DAF7A6' : '#9699C3'}/>
                             ))
                         }
                     </div>
@@ -135,12 +167,10 @@ function Catalog() {
                             <p id="card-text" className={styles['card-text']}>{hoveredDescription}</p>
                             <div className={styles.buttonContainer}>
                                 <button onClick={addToCollection} className={styles.addToCollection}>Add to Collection</button>
-                                <button className={styles.removeFromCollection}>Remove from Collection</button>
-                                <button className={styles.saveCollection}>Save Collection</button>
+                                <button onClick={removeFromCollection} className={styles.removeFromCollection}>Remove from Collection</button>
+                                <button onClick={saveCollection} className={styles.saveCollection}>Save Collection</button>
                             </div>
                         </div>
-
-                        
 
                     </div>
                 </div>

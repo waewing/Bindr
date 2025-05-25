@@ -19,7 +19,7 @@ const UserProfileSchema = new mongoose.Schema({
     },
     collections:{
         type:Object,
-        required:true,
+        required:false,
     }
 });
 

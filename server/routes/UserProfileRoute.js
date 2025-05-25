@@ -24,6 +24,7 @@ router.post("/:id", async(req, res) => {
         displayName: req.body.displayName,
         profileImagePath: req.body.profileImagePath,
         email: req.body.email,
+        collections:req.body.collections,
 
     })
     
@@ -97,6 +98,30 @@ router.patch("/:id/name", async(req, res)=> {
         }
         
         res.status(201).json(updatedFields);
+    } catch(err) {
+
+        res.status(500).json({message: err.message});
+    }
+})
+
+router.patch("/:id/collections" , async(req, res) => {
+    try{
+        const updatedCollections = await UserProfile.findOneAndUpdate(
+            {userID: req.params.id},
+            {
+                $set: {
+                    [`collections.${Object.keys(req.body.collections)[0]}`]: Object.values(req.body.collections)[0],
+                }
+            },
+            { new: true }
+        );
+
+        if (!updatedCollections){
+            return res.status(404).json({ message: "Profile not found" });
+        }
+        
+        res.status(200).json(updatedCollections);
+
     } catch(err) {
 
         res.status(500).json({message: err.message});

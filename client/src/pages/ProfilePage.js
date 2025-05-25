@@ -36,6 +36,7 @@ export default function Profile(){
             try {
                 const res = await axios.get(API_URL + user.sub.split('|').at(-1));
                 if(res.data){
+                    console.log(res.data);
                     setProfileStatus(true);
                     setProfileImage(res.data.profileImagePath);
                     setDisplayName(res.data.displayName);
@@ -49,6 +50,7 @@ export default function Profile(){
                         displayName: user.name,
                         profileImagePath: placeholder,
                         email: user.email,
+                        collections: {}
                     });
                     setProfileImage(placeholder);
 
@@ -166,11 +168,9 @@ export default function Profile(){
 
     //Navigate to catalog via collection
     function toCatalogCollection(){
-        if (collections){
-            navigate('/', {state: collections});
-        } else {
-            navigate('/', {state: {'collection1': []}});
-        }
+        let collectionNumber;
+        collections ? collectionNumber = Object.keys(collections).length : collectionNumber = 0;
+        navigate('/', {state: collectionNumber});
     }
 
     if (isLoading) {
