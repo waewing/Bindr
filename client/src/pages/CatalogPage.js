@@ -32,6 +32,9 @@ function Catalog() {
             setEditingCollectionId(state.collectionId);
             // Load the collection cards and name
             loadCollectionCards(state.collectionId);
+        } else if (!state) {
+            //If not in a collection, disable editing fields
+            document.getElementById('buttonContainer').style.display = 'none';
         }
     }, [state]);
 
@@ -150,6 +153,7 @@ function Catalog() {
         }
     }
 
+
     return (
         <div>
             <div className={styles.container}>
@@ -201,7 +205,7 @@ function Catalog() {
 
                         <div className={styles.description}>
                             <p id="card-text" className={styles['card-text']}>{hoveredDescription}</p>
-                            <div className={styles.buttonContainer}>
+                            <div id='buttonContainer' className={styles.buttonContainer}>
                                 <div className={styles.collectionNameInput}>
                                     <input
                                         type="text"
