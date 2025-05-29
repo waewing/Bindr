@@ -1,0 +1,290 @@
+p{
+    color: #ffffff;
+}
+
+input {
+    max-width: 40%;
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid #202136;
+    background-color: #9699C3;
+}
+
+button{
+    max-width: 30%;
+    height: 2em;
+}
+
+span{
+    color: #ffffff;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    gap: 10px;
+    overflow: hidden;
+}
+
+.banner{
+    background-color: #202136;
+    height: 50px;
+    border-radius: 22.5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.bannerText{
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #ffffff;
+}
+
+.userProfile{
+    display: flex;
+    align-items: center;
+    height: 90%;
+}
+
+.avatar{
+    border: 5px solid #9699C3;
+    border-radius: 50%;
+    max-height: 75%;
+}
+
+
+.contentWrapper {
+    margin-left: 1%;
+    flex: 1; /* Take up remaining space */
+    display: grid;
+    grid-template-columns: 3fr 7fr;
+    gap: 0 1em;
+    overflow: hidden;
+    min-height: 0; /* Allow content to shrink if needed */
+}
+
+.user{
+    display:grid;
+    grid-template-rows: 3fr 7fr;
+    gap: 1em;
+}
+
+.enlargedAvatar{
+    border: 5px solid #9699C3;
+    border-radius: 50%;
+    justify-self: center;
+    width: 220px;
+    height: 220px;
+}
+
+.settings{
+    background: #202136;
+    border-radius: 6px;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 8fr 1fr;
+    grid-template-rows: 2.5fr 2.5fr 2.5fr 2.5fr;
+}
+
+.changeNameText{
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    justify-self: left;
+    align-self: center;
+}
+
+.changeName{
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    justify-self: center;
+    align-self: center;
+}
+
+.submitName{
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    justify-self: right;
+    align-self: center;
+}
+
+.changePasswordText{
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    justify-self: left;
+    align-self: center;
+}
+
+.changePassword{
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    justify-self: center;
+    align-self: center;
+}
+
+.submitPassword{
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    justify-self: right;
+    align-self: center;
+}
+
+.changeEmailText{
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    justify-self: left;
+    align-self: center;
+}
+
+.changeEmail{
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    justify-self: center;
+    align-self: center;
+}
+
+.submitEmail{
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    justify-self: right;
+    align-self: center;
+}
+
+.browse{
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+    justify-self: center;
+    align-self: center;
+}
+
+.changeProfile{
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+    justify-self: left;
+    align-self: center;
+}
+
+.collections {
+    border-radius: 6px;
+    background: #202136;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    overflow-y: auto;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.addNewCollection {
+    margin-bottom: 1em;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    flex-shrink: 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.addNewCollection:hover {
+    background-color: #45a049;
+}
+
+.collectionList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    overflow-y: auto;
+    padding-right: 5px; /* Space for scrollbar */
+}
+
+.collectionItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background-color: #9699C3;
+    border-radius: 5px;
+    border: 1px solid #202136;
+    width: 100%;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+/* Custom scrollbar for collectionList */
+.collectionList::-webkit-scrollbar {
+    width: 8px;
+}
+
+.collectionList::-webkit-scrollbar-track {
+    background: #202136;
+    border-radius: 4px;
+}
+
+.collectionList::-webkit-scrollbar-thumb {
+    background: #9699C3;
+    border-radius: 4px;
+}
+
+.collectionList::-webkit-scrollbar-thumb:hover {
+    background: #7a7d9e;
+}
+
+.collectionName {
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    flex: 1;
+    margin-right: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.collectionActions {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.editCollection, .deleteCollection {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+    white-space: nowrap;
+    min-width: 60px;
+}
+
+.editCollection {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.editCollection:hover {
+    background-color: #45a049;
+}
+
+.deleteCollection {
+    background-color: #f44336;
+    color: white;
+}
+
+.deleteCollection:hover {
+    background-color: #da190b;
+}
