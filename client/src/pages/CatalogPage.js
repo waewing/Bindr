@@ -8,7 +8,8 @@ import LoginButton from "../components/LoginButton"
 import LogoutButton from "../components/LogoutButton"
 import placeholder2 from "../images/placeholder2.png";
 
-const API_URL = "https://bindr-evbw.onrender.com/";
+// Use environment variable for API URL
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000/";
 
 function Catalog() {
     const location = useLocation();
@@ -55,14 +56,20 @@ function Catalog() {
         axios.get(API_URL)
             .then(res => {
                 console.log('API Response:', res.data); // Debug log
-                setFlat(res.data.flat());
-                setHoveredImage(res.data.flat()[0].img_src);
-                sethoveredDescription(res.data.flat()[0].effect);
+                // Handle the data more safely
+                const cardData = Array.isArray(res.data) ? res.data : 
+                               (res.data && typeof res.data === 'object') ? Object.values(res.data) : [];
+                
+                setFlat(cardData);
+                if (cardData.length > 0) {
+                    setHoveredImage(cardData[0].img_src);
+                    sethoveredDescription(cardData[0].effect);
+                }
             })
-
-            .catch(err => 
-                console.error(err)
-            );
+            .catch(err => {
+                console.error('Error loading card data:', err);
+                console.error('Error response:', err.response?.data);
+            });
     }, []);
 
     useEffect(() => {
