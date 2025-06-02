@@ -57,6 +57,7 @@ function Catalog() {
                 setFlat(res.data.flat());
                 setHoveredImage(res.data.flat()[0].img_src);
                 sethoveredDescription(res.data.flat()[0].effect);
+                console.log('API Response:', res.data); // Debug log
             })
 
             .catch(err => 
