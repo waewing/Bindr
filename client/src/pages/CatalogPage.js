@@ -89,6 +89,11 @@ function Catalog() {
         }
         }, [isLoading, isAuthenticated, user]);
 
+    useEffect(() => {
+        console.log('Environment:', process.env.NODE_ENV);
+        console.log('API URL:', process.env.REACT_APP_API_URL);
+        console.log('Full API URL:', API_URL);
+    }, []);
 
     function filterCards(){
         var input, filter, cardCatalog, list, image, id, set, code;
