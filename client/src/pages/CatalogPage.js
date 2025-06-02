@@ -8,7 +8,7 @@ import LoginButton from "../components/LoginButton"
 import LogoutButton from "../components/LogoutButton"
 import placeholder2 from "../images/placeholder2.png";
 
-const API_URL = "https://your-backend-service.onrender.com/";
+const API_URL = "https://bindr-evbw.onrender.com/";
 
 function Catalog() {
     const location = useLocation();

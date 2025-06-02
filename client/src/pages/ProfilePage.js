@@ -6,7 +6,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import styles from "./ProfilePage.module.css";
 import placeholder from "../images/placeholder.jpg";
 
-const API_URL = "https://your-backend-service.onrender.com/";
+const API_URL = "https://bindr-evbw.onrender.com/";
 
 const S3_BUCKET = 'binderprofile-images';
 const REGION = 'us-east-2';
