@@ -13,8 +13,10 @@ const PORT = process.env.PORT || 5000;
 
 //MiddleWare
 app.use(cors({
-  origin: "https://bindr-evbw.onrender.com/",
-  credentials: true // if using cookies/auth
+  origin: process.env.NODE_ENV === 'production' 
+    ? "https://bindr-evbw.onrender.com"  // Remove trailing slash
+    : "http://localhost:3000",
+  credentials: true
 }));
 app.use(express.json());
 

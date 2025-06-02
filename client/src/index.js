@@ -37,8 +37,10 @@ root.render(
       domain='dev-fnrnn64sdqefi86m.us.auth0.com' 
       clientId='r2BuYsNLiZ4SahlZOkgYmRUEi1ZpwrLy' 
       authorizationParams={{
-        redirect_uri: "http://localhost:3000/profile"
-    }}
+        redirect_uri: process.env.NODE_ENV === 'production'
+          ? "https://bindr-evbw.onrender.com/profile"
+          : "http://localhost:3000/profile"
+      }}
       cacheLocation='localstorage'
       useRefreshTokens={true}
       >
