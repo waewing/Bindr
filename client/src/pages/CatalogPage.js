@@ -8,8 +8,8 @@ import LoginButton from "../components/LoginButton"
 import LogoutButton from "../components/LogoutButton"
 import placeholder2 from "../images/placeholder2.png";
 
-// Use environment variable for API URL
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000/";
+// Update the API_URL to include /api
+const API_URL = (process.env.REACT_APP_API_URL || "http://localhost:5000") + "/api/";
 
 function Catalog() {
     const location = useLocation();
