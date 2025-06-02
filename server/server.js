@@ -12,7 +12,10 @@ const PORT = process.env.PORT || 5000;
 
 
 //MiddleWare
-app.use(cors());
+app.use(cors({
+  origin: "https://bindr-evbw.onrender.com/",
+  credentials: true // if using cookies/auth
+}));
 app.use(express.json());
 
 //Serve React Frontend
