@@ -56,9 +56,8 @@ function Catalog() {
         axios.get(`${API_URL}/cards`)
             .then(res => {
                 console.log(`API Response (${API_URL}/cards):`, res.data.flat()); // Debug log
-                // Handle the data more safely
-                const cardData = Array.isArray(res.data) ? res.data : 
-                               (res.data && typeof res.data === 'object') ? Object.values(res.data) : [];
+
+                const cardData = res.data.flat();
                 
                 setFlat(cardData);
                 if (cardData.length > 0) {
