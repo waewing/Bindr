@@ -196,7 +196,7 @@ export default function Profile(){
     const handleDeleteCollection = async (collectionId) => {
         try {
             // Delete the collection using the new endpoint
-            await axios.delete(API_URL + user.sub.split('|').at(-1) + '/collections/' + collectionId);
+            await axios.delete(`${API_URL}/profile/` + user.sub.split('|').at(-1) + '/collections/' + collectionId);
             
             // Update local state
             setCollections(collections.filter(collection => collection.id !== collectionId));
