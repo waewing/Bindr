@@ -41,7 +41,7 @@ function Catalog() {
 
     const loadCollectionCards = async (collectionId) => {
         try {
-            const res = await axios.get(`${API_URL}/profile` + user.sub.split('|').at(-1));
+            const res = await axios.get(`${API_URL}/profile/` + user.sub.split('|').at(-1));
             if (res.data && res.data.collections && res.data.collections[collectionId]) {
                 const collection = res.data.collections[collectionId];
                 setCollectionCards(collection.cards || collection);
