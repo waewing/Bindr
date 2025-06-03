@@ -144,7 +144,7 @@ export default function Profile(){
             return;
         }
         try {
-                axios.patch(API_URL + user.sub.split('|').at(-1) + '/name', {
+                axios.patch(`${API_URL}/profile/`  + user.sub.split('|').at(-1) + '/name', {
                 displayName: displayName,
             });
         } catch (err) {
@@ -162,7 +162,7 @@ export default function Profile(){
             return;
         }
         try {
-                axios.patch(API_URL + user.sub.split('|').at(-1) + '/email', {
+                axios.patch(`${API_URL}/profile/`  + user.sub.split('|').at(-1) + '/email', {
                 email: email,
             });
         } catch (err) {
