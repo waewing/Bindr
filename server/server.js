@@ -19,8 +19,8 @@ app.use(cors({
 app.use(express.json());
 
 // API Routes - These should come BEFORE static file serving
-app.use("api/cards", OnePiece);    // Add /api prefix
-app.use("api/profile", UserProfile); // Add /api prefix
+app.use("/api/cards", OnePiece);    // Add /api prefix
+app.use("/api/profile", UserProfile); // Add /api prefix
 
 // Serve React Frontend - Only in production
 if (process.env.NODE_ENV === 'production') {
