@@ -41,7 +41,7 @@ function Catalog() {
 
     const loadCollectionCards = async (collectionId) => {
         try {
-            const res = await axios.get(`{API_URL}/profile/` + user.sub.split('|').at(-1));
+            const res = await axios.get(`${API_URL}/profile/` + user.sub.split('|').at(-1));
             if (res.data && res.data.collections && res.data.collections[collectionId]) {
                 const collection = res.data.collections[collectionId];
                 setCollectionCards(collection.cards || collection);
@@ -53,9 +53,9 @@ function Catalog() {
     };
 
     useEffect(() => {
-        axios.get(`{API_URL}/cards`)
+        axios.get(`${API_URL}/cards`)
             .then(res => {
-                console.log(`API Response ({API_URL}/cards):`, res.data); // Debug log
+                console.log(`API Response (${API_URL}/cards):`, res.data); // Debug log
                 // Handle the data more safely
                 const cardData = Array.isArray(res.data) ? res.data : 
                                (res.data && typeof res.data === 'object') ? Object.values(res.data) : [];
@@ -75,7 +75,7 @@ function Catalog() {
     useEffect(() => {
         const runProfileCheck = async () => {
             try {
-                const res = await axios.get(`{API_URL}/profile/` + user.sub.split('|').at(-1));
+                const res = await axios.get(`${API_URL}/profile/` + user.sub.split('|').at(-1));
                 if(res.data){
                     setProfileImage(res.data.profileImagePath);
                 }
