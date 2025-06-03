@@ -74,7 +74,7 @@ function Catalog() {
     useEffect(() => {
         const runProfileCheck = async () => {
             try {
-                const res = await axios.get(`${API_URL}/profile` + user.sub.split('|').at(-1));
+                const res = await axios.get(`${API_URL}/profile/` + user.sub.split('|').at(-1));
                 if(res.data){
                     setProfileImage(res.data.profileImagePath);
                 }
