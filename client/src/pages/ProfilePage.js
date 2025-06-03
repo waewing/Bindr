@@ -6,7 +6,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import styles from "./ProfilePage.module.css";
 import placeholder from "../images/placeholder.jpg";
 
-const API_URL = (process.env.REACT_APP_API_URL || "http://localhost:5000") + "/api/";
+const API_URL = (process.env.REACT_APP_API_URL || "http://localhost:5000") + "api";
 
 const S3_BUCKET = 'binderprofile-images';
 const REGION = 'us-east-2';
@@ -35,7 +35,7 @@ export default function Profile(){
     useEffect(() => {
         const runProfileCheck = async () => {
             try {
-                const res = await axios.get(API_URL + user.sub.split('|').at(-1));
+                const res = await axios.get(`${API_URL}/profile/` + user.sub.split('|').at(-1));
                 if(res.data){
                     console.log('Profile data:', res.data);
                     setProfileStatus(true);
