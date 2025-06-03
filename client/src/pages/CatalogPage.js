@@ -148,7 +148,7 @@ function Catalog() {
         }
 
         try {
-            const response = await axios.patch(API_URL + user.sub.split('|').at(-1) + '/collections', {
+            const response = await axios.patch(`${API_URL}/profile/` + user.sub.split('|').at(-1) + '/collections', {
                 collections: {
                     [editingCollectionId || `collection${state}`]: {
                         name: collectionName.trim(),
@@ -170,7 +170,7 @@ function Catalog() {
         <div>
             <div className={styles.container}>
                 <header className={styles.banner}>
-                    <div className={styles.bannerText}>Binder.io</div>
+                    <div className={styles.bannerText}>Binder</div>
                     <LoginButton/>
                     <LogoutButton/>
                     <div className={styles.userProfile}>
