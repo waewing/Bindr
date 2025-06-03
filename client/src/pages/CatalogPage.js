@@ -55,7 +55,7 @@ function Catalog() {
     useEffect(() => {
         axios.get(`{API_URL}/cards`)
             .then(res => {
-                console.log('API Response (`{API_URL}/cards`):', res.data); // Debug log
+                console.log(`API Response ({API_URL}/cards):`, res.data); // Debug log
                 // Handle the data more safely
                 const cardData = Array.isArray(res.data) ? res.data : 
                                (res.data && typeof res.data === 'object') ? Object.values(res.data) : [];
