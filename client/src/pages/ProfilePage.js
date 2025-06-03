@@ -53,7 +53,7 @@ export default function Profile(){
                 }
             } catch (err) {
                 try {
-                    await axios.post(API_URL + user.sub.split('|').at(-1), {
+                    await axios.post(`${API_URL}/profile/` + user.sub.split('|').at(-1), {
                         userID: user.sub,   //Auth0 ID
                         displayName: user.name,
                         profileImagePath: placeholder,
@@ -101,7 +101,7 @@ export default function Profile(){
             
             // Update the profile image in your database
             try {
-                await axios.patch(API_URL + user.sub.split('|').at(-1) + '/avatar', {
+                await axios.patch(`${API_URL}/profile/`  + user.sub.split('|').at(-1) + '/avatar', {
                     profileImagePath: uploadResult.Location, // This is the S3 URL
                 });
                 
@@ -122,7 +122,7 @@ export default function Profile(){
 
         const updateAvatar = async () => {
             try {
-                    await axios.patch(API_URL + user.sub.split('|').at(-1) + '/avatar', {
+                    await axios.patch(`${API_URL}/profile/`  + user.sub.split('|').at(-1) + '/avatar', {
                     profileImagePath: profileImage,
                 });
                 
