@@ -9,7 +9,7 @@ import LogoutButton from "../components/LogoutButton"
 import placeholder2 from "../images/placeholder2.png";
 
 // Update the API_URL to include /api
-const API_URL = (process.env.REACT_APP_API_URL || "http://localhost:5000") + "api/";
+const API_URL = (process.env.REACT_APP_API_URL || "http://localhost:5000") + "api";
 
 function Catalog() {
     const location = useLocation();
@@ -41,7 +41,7 @@ function Catalog() {
 
     const loadCollectionCards = async (collectionId) => {
         try {
-            const res = await axios.get(`${API_URL}/profile/` + user.sub.split('|').at(-1));
+            const res = await axios.get(`${API_URL}/profile` + user.sub.split('|').at(-1));
             if (res.data && res.data.collections && res.data.collections[collectionId]) {
                 const collection = res.data.collections[collectionId];
                 setCollectionCards(collection.cards || collection);
@@ -75,7 +75,7 @@ function Catalog() {
     useEffect(() => {
         const runProfileCheck = async () => {
             try {
-                const res = await axios.get(`${API_URL}/profile/` + user.sub.split('|').at(-1));
+                const res = await axios.get(`${API_URL}/profile` + user.sub.split('|').at(-1));
                 if(res.data){
                     setProfileImage(res.data.profileImagePath);
                 }
