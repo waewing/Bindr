@@ -1,4 +1,4 @@
-#[Bindr](https://bindr-evbw.onrender.com/)
+# [Bindr](https://bindr-evbw.onrender.com/)
 
 **Bindr** is a webapp built for the purpose if keeping track of your card collection online built using the **MERN Stack** utilizing, **AWS S3** buckets for image storage, **Auth0** to securely handle user accounts, and deployed using **Render**.
 
